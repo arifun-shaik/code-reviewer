@@ -20,10 +20,13 @@ function App() {
     prism.highlightAll()
   }, [])
 
-  async function reviewCode() {
-    const response = await axios.post('http://localhost:3000/ai/get-review', { code })
-    setReview(response.data)
-  }
+ async function reviewCode() {
+  const response = await axios.get('http://localhost:3000/ai/get-response', {
+    params: { prompt: code }  // 'prompt' must match the backend query key
+  });
+  setReview(response.data);
+}
+
 
   return (
     <>
